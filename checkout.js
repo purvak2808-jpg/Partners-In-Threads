@@ -1,5 +1,9 @@
-function displayCheckoutItems() {
+```javascript
+// ======================================
+// DISPLAY CHECKOUT ITEMS
+// ======================================
 
+function displayCheckoutItems() {
     const checkoutCart =
         JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -9,16 +13,16 @@ function displayCheckoutItems() {
     const checkoutTotal =
         document.getElementById("checkout-total");
 
-    if (!checkoutItems || !checkoutTotal) {
-        return;
-    }
+    if (!checkoutItems || !checkoutTotal) return;
 
     if (checkoutCart.length === 0) {
-
         checkoutItems.innerHTML = `
-            <div class="empty-cart">
+            <div class="empty">
                 <h3>Your cart is empty</h3>
                 <p>Please add products before checkout.</p>
+                <a href="products.html" class="btn primary">
+                    Browse Products
+                </a>
             </div>
         `;
 
@@ -29,8 +33,7 @@ function displayCheckoutItems() {
     let total = 0;
 
     checkoutItems.innerHTML = checkoutCart.map(function(item) {
-
-        const price = Number(item.price);
+        const price = Number(item.price) || 0;
         const quantity = Number(item.quantity) || 1;
         const itemTotal = price * quantity;
 
@@ -38,71 +41,77 @@ function displayCheckoutItems() {
 
         return `
             <div class="checkout-item">
-
                 <div class="checkout-item-image">
                     <img
-                        src="${item.image}"
-                        alt="${item.name}"
+                        src="${item.image || ""}"
+                        alt="${item.name || "Crochet product"}"
                     >
                 </div>
 
                 <div class="checkout-item-info">
-                    <h3>${item.name}</h3>
+                    <h3>${item.name || "Crochet product"}</h3>
                     <p>₹${price} × ${quantity}</p>
                 </div>
 
                 <strong>₹${itemTotal}</strong>
-
             </div>
         `;
-
     }).join("");
 
     checkoutTotal.textContent = "₹" + total;
 }
 
 
-// PAYMENT METHOD
+// ======================================
+// PAYMENT OPTIONS
+// ======================================
 
 function setupPaymentOptions() {
-
     const paymentOptions =
         document.querySelectorAll('input[name="payment"]');
 
     const upiBox =
         document.getElementById("upi-payment-box");
 
-    if (!upiBox) {
-        return;
+    const upiConfirmation =
+        document.getElementById("upi-confirmation");
+
+    if (!upiBox) return;
+
+    function updatePaymentDisplay() {
+        const selectedPayment =
+            document.querySelector('input[name="payment"]:checked');
+
+        const isUpi =
+            selectedPayment && selectedPayment.value === "upi";
+
+        upiBox.style.display = isUpi ? "block" : "none";
+
+        if (upiConfirmation) {
+            upiConfirmation.required = Boolean(isUpi);
+        }
     }
 
     paymentOptions.forEach(function(option) {
-
-        option.addEventListener("change", function() {
-
-            if (this.value === "upi") {
-                upiBox.style.display = "block";
-            } else {
-                upiBox.style.display = "none";
-            }
-
-        });
-
+        option.addEventListener("change", updatePaymentDisplay);
     });
+
+    updatePaymentDisplay();
 }
 
 
+// ======================================
 // PLACE ORDER
+// ======================================
 
 function placeOrder(event) {
-
     event.preventDefault();
 
     const checkoutCart =
         JSON.parse(localStorage.getItem("cart")) || [];
 
     if (checkoutCart.length === 0) {
-        alert("Your cart is empty!");
+        alert("Your cart is empty! Please add products first.");
         return;
     }
 
@@ -132,55 +141,35 @@ function placeOrder(event) {
         return;
     }
 
-    const paymentMethod =
-        paymentElement.value;
+    const paymentMethod = paymentElement.value;
 
-
-    // UPI CONFIRMATION
-
+    // Confirm UPI payment selection.
+    // This checkbox does not independently verify a real payment.
     if (paymentMethod === "upi") {
-
         const upiConfirmation =
             document.getElementById("upi-confirmation");
 
         if (!upiConfirmation || !upiConfirmation.checked) {
-
-            alert(
-                "Please confirm that you have completed the UPI payment."
-            );
-
+            alert("Please confirm your UPI payment before continuing.");
             return;
         }
     }
 
+    // Calculate order total.
+    const total = checkoutCart.reduce(function(sum, item) {
+        const price = Number(item.price) || 0;
+        const quantity = Number(item.quantity) || 1;
 
-    // CALCULATE TOTAL
+        return sum + price * quantity;
+    }, 0);
 
-    const total = checkoutCart.reduce(
-        function(sum, item) {
-
-            return sum +
-                Number(item.price) *
-                Number(item.quantity);
-
-        },
-        0
-    );
-
-
-    // GENERATE ORDER ID
-
+    // Generate order ID.
     const orderId =
-        "PIT" +
-        Date.now().toString().slice(-8);
+        "PIT" + Date.now().toString().slice(-8);
 
-
-    // CREATE ORDER
-
+    // Create order details.
     const order = {
-
         orderId: orderId,
-
         date: new Date().toLocaleString(),
 
         customer: {
@@ -194,58 +183,43 @@ function placeOrder(event) {
 
         paymentMethod: paymentMethod,
 
-        paymentStatus:
-            paymentMethod === "cod"
-                ? "Cash on Delivery"
-                : "UPI payment confirmed by customer",
+        paymentStatus: paymentMethod === "cod"
+            ? "Cash on Delivery — unpaid"
+            : "UPI confirmation provided by customer — unverified",
 
         items: checkoutCart,
-
         total: total
     };
 
+    // Save the latest order in this browser.
+    try {
+        localStorage.setItem("lastOrder", JSON.stringify(order));
+    } catch (error) {
+        alert("Unable to save your order in this browser. Please try again.");
+        return;
+    }
 
-    // SAVE ORDER
-
-    localStorage.setItem(
-        "lastOrder",
-        JSON.stringify(order)
-    );
-
-
-    // REMOVE CART
-
+    // Clear cart after saving the order.
     localStorage.removeItem("cart");
 
-
-    // OPEN SUCCESS PAGE
-
-    window.location.href =
-        "order-success.html";
+    // Redirect to order confirmation page.
+    window.location.href = "order-success.html";
 }
 
 
-// PAGE LOAD
+// ======================================
+// PAGE INITIALIZATION
+// ======================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+document.addEventListener("DOMContentLoaded", function() {
+    displayCheckoutItems();
+    setupPaymentOptions();
 
-        displayCheckoutItems();
+    const checkoutForm =
+        document.getElementById("checkout-form");
 
-        setupPaymentOptions();
-
-        const checkoutForm =
-            document.getElementById("checkout-form");
-
-        if (checkoutForm) {
-
-            checkoutForm.addEventListener(
-                "submit",
-                placeOrder
-            );
-
-        }
-
+    if (checkoutForm) {
+        checkoutForm.addEventListener("submit", placeOrder);
     }
-);
+});
+```
