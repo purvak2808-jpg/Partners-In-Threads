@@ -1,11 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Partners In Threads</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,442 +16,286 @@
             Partners In <span>Threads</span>
         </a>
 
-        <button class="menu-toggle">☰</button>
+        <button class="menu-toggle" aria-label="Open menu">☰</button>
 
         <nav>
             <a href="index.html">Home</a>
             <a href="about.html">About Us</a>
             <a href="products.html">Products</a>
             <a href="contact.html">Contact</a>
-
             <a href="cart.html" class="cart-link">
                 🛒 Cart <span class="cart-count">0</span>
             </a>
         </nav>
     </header>
 
-
     <!-- PAGE HERO -->
     <section class="page-hero">
         <p class="eyebrow">OUR COLLECTION</p>
-
         <h1>
             Handmade for every<br>
             <em>special moment.</em>
         </h1>
     </section>
 
-
     <!-- PRODUCTS -->
     <section class="products-section">
 
         <!-- CATEGORY FILTERS -->
         <div class="filters">
-
-            <button class="active" data-filter="all">
-                All
-            </button>
-
-            <button data-filter="keychains">
-                Keychains
-            </button>
-
-            <button data-filter="bouquets">
-                Bouquets
-            </button>
-
-            <button data-filter="pots">
-                Pots
-            </button>
-
-            <button data-filter="gajra">
-                Gajra
-            </button>
-
-            <button data-filter="wall-hangings">
-                Wall Hangings
-            </button>
-
+            <button class="active" data-filter="all">All</button>
+            <button data-filter="keychains">Keychains</button>
+            <button data-filter="bouquets">Bouquets</button>
+            <button data-filter="pots">Pots</button>
+            <button data-filter="gajra">Gajra</button>
+            <button data-filter="wall-hangings">Wall Hangings</button>
         </div>
-
 
         <!-- PRODUCT GRID -->
         <div class="product-grid">
 
-
-            <!-- ================= KEYCHAINS ================= -->
-
-            <!-- Evil Eye Keychain -->
+            <!-- 1. EVIL EYE KEYCHAIN -->
             <article class="product-card" data-category="keychains">
-
                 <div class="product-image">
-                  <img src="images/evil-eye-keychain.png" alt="Evil Eye Keychain">
+                    <img src="evil-eye-keychain.png" alt="Evil Eye Keychain">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Keychains</span>
-
                     <h3>Evil Eye Keychain</h3>
-
                     <p>A cute handmade evil eye keychain.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹100</span>
-        <span class="sale-price">₹80</span>
-    </div>
-
-    <button onclick="addToCart('Evil Eye Keychain', 80, 'images/evil-eye-keychain.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹100</span>
+                            <span class="sale-price">₹80</span>
+                        </div>
+                        <button onclick="addToCart('Evil Eye Keychain', 80, 'evil-eye-keychain.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-            <!-- Rose Keychain -->
+            <!-- 2. ROSE KEYCHAIN -->
             <article class="product-card" data-category="keychains">
-
                 <div class="product-image">
-                    <img src="images/rose-keychain.png" alt="Rose Keychain">
+                    <img src="rose-keychain.png" alt="Rose Keychain">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Keychains</span>
-
                     <h3>Rose Keychain</h3>
-
                     <p>A tiny handmade rose to carry everywhere.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹100</span>
-        <span class="sale-price">₹80</span>
-    </div>
-
-    <button onclick="addToCart('Rose Keychain', 80, 'images/rose-keychain.png')">
-        Add to Cart
-    </button>
-</div>
+                        <div class="price">
+                            <span class="original-price">₹100</span>
+                            <span class="sale-price">₹80</span>
+                        </div>
+                        <button onclick="addToCart('Rose Keychain', 80, 'rose-keychain.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-            <!-- Rose Bouquet Keychain -->
+            <!-- 3. ROSE BOUQUET KEYCHAIN -->
             <article class="product-card" data-category="keychains">
-
                 <div class="product-image">
-                    <img src="images/rose-bouquet-keychain.png" alt="Rose Bouquet Keychain">
+                    <img src="rose-bouquet-keychain.png" alt="Rose Bouquet Keychain">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Keychains</span>
-
                     <h3>Rose Bouquet Keychain</h3>
-
                     <p>A miniature bouquet made into a cute keychain.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹100</span>
-        <span class="sale-price">₹80</span>
-    </div>
-
-    <button onclick="addToCart('Rose Bouquet Keychain', 80, 'images/rose-bouquet-keychain.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹100</span>
+                            <span class="sale-price">₹80</span>
+                        </div>
+                        <button onclick="addToCart('Rose Bouquet Keychain', 80, 'rose-bouquet-keychain.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-            <!-- Tulip Keychain -->
+            <!-- 4. TULIP KEYCHAIN -->
             <article class="product-card" data-category="keychains">
-
                 <div class="product-image">
-                    <img src="images/tulip-keychain.png" alt="Tulip Keychain">
+                    <img src="tulip-keychain.png" alt="Tulip Keychain">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Keychains</span>
-
                     <h3>Tulip Keychain</h3>
-
                     <p>A pretty handmade tulip keychain.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹120</span>
-        <span class="sale-price">₹96</span>
-    </div>
-
-    <button onclick="addToCart('Tulip Keychain', 96, 'images/tulip-keychain.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹120</span>
+                            <span class="sale-price">₹96</span>
+                        </div>
+                        <button onclick="addToCart('Tulip Keychain', 96, 'tulip-keychain.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-
-            <!-- ================= BOUQUETS ================= -->
-
-            <!-- Tulip Bouquet -->
+            <!-- 5. TULIP BOUQUET -->
             <article class="product-card" data-category="bouquets">
-
                 <div class="product-image">
-                    <img src="images/tulip-bouquet.png" alt="Tulip Bouquet">
+                    <img src="tulip-bouquet.png" alt="Tulip Bouquet">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Bouquets</span>
-
                     <h3>Tulip Bouquet</h3>
-
                     <p>A beautiful handmade bouquet of tulips.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹500</span>
-        <span class="sale-price">₹400</span>
-    </div>
-
-    <button onclick="addToCart('Tulip Bouquet', 400, 'images/tulip-bouquet.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹500</span>
+                            <span class="sale-price">₹400</span>
+                        </div>
+                        <button onclick="addToCart('Tulip Bouquet', 400, 'tulip-bouquet.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-            <!-- Sunflower Bouquet -->
+            <!-- 6. SUNFLOWER BOUQUET -->
             <article class="product-card" data-category="bouquets">
-
                 <div class="product-image">
-                    <img src="images/sunflower-bouquet.png" alt="Sunflower Bouquet">
+                    <img src="sunflower-bouquet.png" alt="Sunflower Bouquet">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Bouquets</span>
-
                     <h3>Sunflower Bouquet</h3>
-
                     <p>Bright handmade sunflowers for happy moments.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹550</span>
-        <span class="sale-price">₹440</span>
-    </div>
-
-    <button onclick="addToCart('Sunflower Bouquet', 440, 'images/sunflower-bouquet.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹550</span>
+                            <span class="sale-price">₹440</span>
+                        </div>
+                        <button onclick="addToCart('Sunflower Bouquet', 440, 'sunflower-bouquet.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-            <!-- Rose Bouquet -->
+            <!-- 7. ROSE BOUQUET -->
             <article class="product-card" data-category="bouquets">
-
                 <div class="product-image">
-                    <img src="images/rose-bouquet.png" alt="Rose Bouquet">
+                    <img src="rose-bouquet.png" alt="Rose Bouquet">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Bouquets</span>
-
                     <h3>Rose Bouquet</h3>
-
                     <p>A timeless handmade rose bouquet.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹400</span>
-        <span class="sale-price">₹320</span>
-    </div>
-
-    <button onclick="addToCart('Rose Bouquet', 320, 'images/rose-bouquet.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹400</span>
+                            <span class="sale-price">₹320</span>
+                        </div>
+                        <button onclick="addToCart('Rose Bouquet', 320, 'rose-bouquet.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-
-            <!-- ================= POTS ================= -->
-
-            <!-- Sunflower Pot -->
+            <!-- 8. SUNFLOWER POT -->
             <article class="product-card" data-category="pots">
-
                 <div class="product-image">
-                    <img src="images/sunflower-pot.png" alt="Sunflower Pot">
+                    <img src="sunflower-pot.png" alt="Sunflower Pot">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Pots</span>
-
                     <h3>Sunflower Pot</h3>
-
                     <p>A cheerful handmade sunflower pot.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹300</span>
-        <span class="sale-price">₹240</span>
-    </div>
-
-    <button onclick="addToCart('Sunflower Pot', 240, 'images/sunflower-pot.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹300</span>
+                            <span class="sale-price">₹240</span>
+                        </div>
+                        <button onclick="addToCart('Sunflower Pot', 240, 'sunflower-pot.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-
-            <!-- ================= GAJRA ================= -->
-
-            <!-- Mojra + Rose Gajra -->
+            <!-- 9. MOGRA + ROSE GAJRA -->
             <article class="product-card" data-category="gajra">
-
                 <div class="product-image">
-                    <img src="images/mogra-rose-gajra.png" alt="Mogra & Rose Gajra">
+                    <img src="mogra-rose-gajra.png" alt="Mogra and Rose Gajra">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Gajra</span>
-
                     <h3>Mojra + Rose Gajra</h3>
-
-                    <p>A beautiful handmade combination of mojra and roses.</p>
-
+                    <p>A beautiful handmade combination of mogra and roses.</p>
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹250</span>
-        <span class="sale-price">₹200</span>
-    </div>
-
-    <button onclick="addToCart('Mogra & Rose Gajra', 200, 'images/mogra-rose-gajra.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹250</span>
+                            <span class="sale-price">₹200</span>
+                        </div>
+                        <button onclick="addToCart('Mogra & Rose Gajra', 200, 'mogra-rose-gajra.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
 
-
-
-            <!-- ================= WALL HANGINGS ================= -->
-
-            <!-- Evil Eye Wall Hanging -->
+            <!-- 10. EVIL EYE WALL HANGING -->
             <article class="product-card" data-category="wall-hangings">
-
                 <div class="product-image">
-                    <img src="images/evil-eye-wall-hanging.png" alt="Evil Eye Wall Hanging">
+                    <img src="evil-eye-wall-hanging.png" alt="Evil Eye Wall Hanging">
                 </div>
-
                 <div class="product-info">
-
                     <span class="tag">Wall Hangings</span>
-
                     <h3>Evil Eye Wall Hanging</h3>
-
                     <p>A handmade evil eye decoration for your space.</p>
-
                     <div class="product-bottom">
-    <div class="price">
-        <span class="original-price">₹600</span>
-        <span class="sale-price">₹480</span>
-    </div>
-
-    <button onclick="addToCart('Evil Eye Wall Hanging', 480, 'images/evil-eye-wall-hanging.png')">
-        Add to Cart
-    </button>
-</div>
-
+                        <div class="price">
+                            <span class="original-price">₹600</span>
+                            <span class="sale-price">₹480</span>
+                        </div>
+                        <button onclick="addToCart('Evil Eye Wall Hanging', 480, 'evil-eye-wall-hanging.png')">
+                            Add to Cart
+                        </button>
+                    </div>
                 </div>
-
             </article>
-
 
         </div>
-
     </section>
-
 
     <!-- FOOTER -->
     <footer>
-
         <div>
             <a class="logo" href="index.html">
                 Partners In <span>Threads</span>
             </a>
-
             <p>Handmade gifts, made with love.</p>
         </div>
 
-
         <div>
-
             <h4>Get in Touch</h4>
-
-            <a href="tel:8452971960">
-                📞 8452971960
-            </a>
-
+            <a href="tel:8452971960">📞 8452971960</a>
             <a href="https://www.instagram.com/partners.in.threads/?hl=en"
-               target="_blank">
+               target="_blank" rel="noopener noreferrer">
                 📸 Instagram
             </a>
-
         </div>
 
-
         <p class="copyright">
-            © 2026 Partners In Threads.
+            © 2026 Partners In Threads. All rights reserved.
         </p>
-
     </footer>
 
-
     <!-- FLOATING CALL BUTTON -->
-    <a class="floating-call" href="tel:8452971960">
-        📞
-    </a>
-
+    <a class="floating-call" href="tel:8452971960">📞</a>
 
     <!-- JAVASCRIPT -->
-   <script src="js/script.js"></script>
-   <script src="js/cart.js"></script>
+    <script src="script.js"></script>
+    <script src="cart.js"></script>
 
 </body>
-
 </html>
