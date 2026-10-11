@@ -1,153 +1,170 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Order Placed | Partners In Threads</title>
+    <link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: #fff9f8;
+            color: #59434a;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .success-container {
+            max-width: 800px;
+            margin: 45px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px #ead8dc;
+        }
+
+        .success-heading {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            color: #b84c72;
+        }
+
+        h1, h2 {
+            color: #b84c72;
+        }
+
+        .order-info, .order-item {
+            background: #fff5f8;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 20px;
+            margin: 8px 5px;
+            border-radius: 8px;
+            background: #b84c72;
+            color: white;
+            text-decoration: none;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .success-container {
+                margin: 20px 12px;
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
+    <main class="success-container">
+        <section class="success-heading">
+            <div class="success-icon">✓ 💗</div>
+            <p>THANK YOU FOR SHOPPING WITH US</p>
+            <h1>Your order is placed!</h1>
+            <p>Thank you for choosing Partners In Threads. 🧶💕</p>
+        </section>
 
-    <a class="logo" href="index.html">
-        Partners In <span>Threads</span>
-    </a>
+        <section class="order-info">
+            <p><strong>Order ID:</strong> <span id="order-id">Loading...</span></p>
+            <p><strong>Order Date:</strong> <span id="order-date">—</span></p>
+            <p><strong>Payment Method:</strong> <span id="payment-method">—</span></p>
+            <p><strong>Payment Status:</strong> <span id="payment-status">—</span></p>
+        </section>
 
-    <button class="menu-toggle">☰</button>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="products.html">Products</a>
-        <a href="contact.html">Contact</a>
-
-        <a href="cart.html" class="cart-link">
-            🛒 Cart
-            <span class="cart-count">0</span>
-        </a>
-    </nav>
-
-</header>
-
-
-<main class="order-success-page">
-
-    <div class="success-box">
-
-        <div class="success-icon">
-            ✓
+        <h2>Order Details</h2>
+        <div id="order-items">
+            Loading your items...
         </div>
 
-        <p class="eyebrow">
-            THANK YOU FOR SHOPPING WITH US
-        </p>
+        <p class="total">Total Amount: <span id="order-total">₹0</span></p>
 
-        <h1>
-            Your order is <em>placed!</em>
-        </h1>
-
-        <p class="success-message">
-            Thank you for choosing Partners In Threads. 🧶💕
-        </p>
-
-        <div class="order-id-box">
-
-            <span>Order ID</span>
-
-            <strong id="success-order-id">
-                -
-            </strong>
-
+        <div class="buttons">
+            <a href="products.html" class="btn">Continue Shopping</a>
+            <a href="index.html" class="btn">Back to Home</a>
         </div>
+    </main>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const order = JSON.parse(localStorage.getItem("lastOrder") || "null");
 
-        <div class="success-details">
+            if (!order) {
+                document.getElementById("order-items").innerHTML =
+                    "<p>Order details are not available in this browser. Please contact us if you need help.</p>";
+                document.getElementById("order-id").textContent = "Unavailable";
+                return;
+            }
 
-            <h2>Order Details</h2>
+            document.getElementById("order-id").textContent = order.orderId || "—";
+            document.getElementById("order-date").textContent = order.date || "—";
 
-            <div id="success-customer"></div>
+            document.getElementById("payment-method").textContent =
+                order.paymentMethod === "cod" ? "Cash on Delivery" : "UPI";
 
-        </div>
+            document.getElementById("payment-status").textContent =
+                order.paymentStatus || "Pending confirmation";
 
+            const items = Array.isArray(order.items) ? order.items : [];
 
-        <div class="success-products">
+            document.getElementById("order-items").innerHTML = "";
 
-            <h2>Your Items</h2>
+            if (items.length === 0) {
+                document.getElementById("order-items").textContent =
+                    "No item details are available.";
+            } else {
+                items.forEach(function (item) {
+                    const row = document.createElement("div");
+                    row.className = "order-item";
 
-            <div id="success-items"></div>
+                    const name = document.createElement("span");
+                    name.textContent = (item.name || "Crochet product") +
+                        " × " + (Number(item.quantity) || 1);
 
-        </div>
+                    const price = document.createElement("strong");
+                    price.textContent = "₹" +
+                        ((Number(item.price) || 0) *
+                        (Number(item.quantity) || 1)).toFixed(2);
 
+                    row.appendChild(name);
+                    row.appendChild(price);
 
-        <div class="success-total">
+                    document.getElementById("order-items").appendChild(row);
+                });
+            }
 
-            <span>Total Amount</span>
-
-            <strong id="success-total">
-                ₹0
-            </strong>
-
-        </div>
-
-
-        <div class="success-buttons">
-
-            <a href="products.html" class="continue-shopping">
-                Continue Shopping
-            </a>
-
-            <a href="index.html" class="home-button">
-                Back to Home
-            </a>
-
-        </div>
-
-    </div>
-
-</main>
-
-
-<footer>
-
-    <div>
-
-        <a class="logo" href="index.html">
-            Partners In <span>Threads</span>
-        </a>
-
-        <p>Handmade gifts, made with love.</p>
-
-    </div>
-
-    <div>
-
-        <h4>Get in Touch</h4>
-
-        <a href="tel:8452971960">
-            📞 8452971960
-        </a>
-
-        <a href="https://www.instagram.com/partners.in.threads/?hl=en"
-           target="_blank">
-            📸 Instagram
-        </a>
-
-    </div>
-
-    <p class="copyright">
-        © 2026 Partners In Threads.
-    </p>
-
-</footer>
-
-
-<script src="js/script.js"></script>
-<script src="js/order-success.js"></script>
+            document.getElementById("order-total").textContent =
+                "₹" + (Number(order.total) || 0).toFixed(2);
+        });
+    </script>
 
 </body>
 </html>
