@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPI Payment | Partners In Threads</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #fff5f8;
+            color: #59434a;
+            font-family: Arial, sans-serif;
+        }
+
+        .payment-card {
+            max-width: 500px;
+            margin: 35px auto;
+            padding: 30px 20px;
+            text-align: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px #ead8dc;
+        }
+
+        h1, h2 { color: #b84c72; }
+
+        .qr-image {
+            display: block;
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            margin: 20px auto;
+        }
+
+        .upi-id {
+            padding: 12px;
+            background: #fff0f5;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        button, .btn {
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #b84c72;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .note {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="payment-card">
+        <h1>Complete Your Payment 💗</h1>
+        <p>Thank you for shopping with Partners In Threads!</p>
+
+        <p>Order ID: <strong id="order-id">Loading...</strong></p>
+        <p>Amount to pay</p>
+        <h2 id="order-total">₹0</h2>
+
+        <p>Scan the QR code using your UPI app.</p>
+
+        <img class="qr-image"
+             src="./upi-qr.png.jpg"
+             alt="UPI payment QR code">
+
+        <p>Or pay using this UPI ID:</p>
+        <p class="upi-id" id="upi-id">purvak2808@okhdfcbank</p>
+
+        <button type="button" onclick="copyUpi()">Copy UPI ID</button>
+
+        <hr>
+
+        <p class="note">
+            After paying, confirm the payment in your UPI app.
+            The seller must verify the payment before treating the order as paid.
+        </p>
+
+        <label>
+            <input type="checkbox" id="payment-confirmation">
+            I have completed the payment.
+        </label>
+
+        <br>
+
+        <button type="button" onclick="confirmPayment()">
+            Confirm and Continue
+        </button>
+
+        <p>
+            <a href="./checkout.html">Back to Checkout</a>
+        </p>
+    </main>
+
+    <script>
+        const order = JSON.parse(
+            localStorage.getItem("lastOrder") || "null"
+        );
+
+        if (!order || order.paymentMethod !== "upi") {
+            document.querySelector(".payment-card").innerHTML = `
+                <h1>No pending UPI order</h1>
+                <p>Please select UPI at checkout first.</p>
+                <a class="btn" href="./checkout.html">Back to Checkout</a>
+            `;
+        } else {
+            document.getElementById("order-id").textContent =
+                order.orderId || "—";
+
+            document.getElementById("order-total").textContent =
+                "₹" + (Number(order.total) || 0).toFixed(2);
+        }
+
+        function copyUpi() {
+            const upi = document.getElementById("upi-id").textContent.trim();
+
+            if (upi === "purvak2808@okhdfcbank") {
+                alert("Replace the placeholder with your actual UPI ID first.");
+                return;
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(upi)
+                    .then(() => alert("UPI ID copied!"))
+                    .catch(() => alert("Please copy this UPI ID manually: " + upi));
+            } else {
+                alert("Please copy this UPI ID manually: " + upi);
+            }
+        }
+
+        function confirmPayment() {
+            const checkbox =
+                document.getElementById("payment-confirmation");
+
+            if (!checkbox.checked) {
+                alert("Please confirm that you have completed payment.");
+                return;
+            }
+
+            const latestOrder = JSON.parse(
+                localStorage.getItem("lastOrder") || "null"
+            );
+
+            if (!latestOrder || latestOrder.paymentMethod !== "upi") {
+                alert("Order not found. Please return to checkout.");
+                return;
+            }
+
+            latestOrder.paymentStatus =
+                "Customer confirmed payment — awaiting seller verification";
+
+            localStorage.setItem("lastOrder", JSON.stringify(latestOrder));
+
+            localStorage.removeItem("cart");
+
+            window.location.href = "./order-success.html";
+        }
+    </script>
+</body>
+</html>
