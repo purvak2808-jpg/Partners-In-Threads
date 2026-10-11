@@ -166,41 +166,51 @@
 
                     </div>
 
-                    <!-- UPI PAYMENT DETAILS -->
-                    <div id="upi-payment-box" class="upi-payment-box">
 
-                        <h3>Pay using UPI</h3>
+<!-- UPI PAYMENT DETAILS -->
+<div id="upi-payment-box" class="upi-payment-box">
 
-                        <p>Send the order amount to your UPI ID:</p>
+    <h3>Pay using UPI 💗</h3>
 
-                        <div class="upi-id">
-                            YOUR-UPI-ID@upi
-                        </div>
+    <p>Scan the QR code below to pay your order amount.</p>
 
-                        <p class="upi-note">
-                            After making the payment, confirm it below.
-                        </p>
+    <div class="upi-qr-container">
+        <img
+            src="upi-qr.png"
+            alt="Partners In Threads UPI QR Code"
+            class="upi-qr-image"
+        >
+    </div>
 
-                        <label class="payment-confirmation">
-                            <input
-                                type="checkbox"
-                                id="upi-confirmation"
-                            >
-                            <span>I have completed the UPI payment</span>
-                        </label>
+    <p>Or send payment to your UPI ID:</p>
 
-                    </div>
+    <div class="upi-id">
+        YOUR-UPI-ID@upi
+    </div>
 
-                    <button
-                        type="submit"
-                        class="checkout-submit"
-                    >
-                        Place Order
-                    </button>
+    <p class="upi-note">
+        After making the payment, confirm it below.
+    </p>
 
-                </form>
+    <label class="payment-confirmation">
+        <input
+            type="checkbox"
+            id="upi-confirmation"
+        >
+        <span>I have completed the UPI payment</span>
+    </label>
 
-            </section>
+</div>
+
+<button
+    type="submit"
+    class="checkout-submit"
+>
+    Place Order
+</button>
+</form>
+
+</section>
 
             <!-- ORDER SUMMARY -->
             <aside class="checkout-summary">
