@@ -1341,6 +1341,46 @@ footer{background:#302326;color:#f8eeee;padding:55px 8% 25px;display:grid;grid-t
     cursor: pointer;
 }
 
+
+/* UPI QR Code */
+.upi-qr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #f0c5d8;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.upi-qr-image {
+    display: block;
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.upi-payment-box {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    background: #fff7fb;
+}
+
+.upi-payment-box h3 {
+    color: #a83268;
+}
+
+.upi-note {
+    font-size: 14px;
+    color: #666;
+}
+
 .payment-confirmation input {
     width: auto !important;
     margin: 0 !important;
